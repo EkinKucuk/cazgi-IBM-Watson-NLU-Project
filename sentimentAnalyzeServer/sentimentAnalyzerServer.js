@@ -29,16 +29,19 @@ app.get("/",(req,res)=>{
   });
 
 app.get("/url/emotion", (req,res) => {
-
-    return res.send({"happy":"90","sad":"10"});
+   const nlu = getNLUInstance();
+    return res.send(nlu.analyze(req.query.text));
 });
 
 app.get("/url/sentiment", (req,res) => {
+    const nlu = getNLUInstance();
     return res.send("url sentiment for "+req.query.url);
 });
 
 app.get("/text/emotion", (req,res) => {
-    return res.send({"happy":"10","sad":"90"});
+    const nlu = getNLUInstance();
+    console.log(req)
+    return res.send(nlu.analyze(req.query.text));
 });
 
 app.get("/text/sentiment", (req,res) => {
